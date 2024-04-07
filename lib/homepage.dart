@@ -3,8 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:woocommerce_flutter/colors.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:circular_menu/circular_menu.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -105,21 +107,65 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 120,
-        backgroundColor: primaryColor,
-        title: Column(
+          toolbarHeight: 120,
+          backgroundColor: primaryColor,
+          title: Column(
+            children: [
+              SizedBox(height: 10),
+              Image.asset(
+                "images/logo.png",
+                width: 250,
+              ),
+              SizedBox(height: 10),
+              const Text("NewOrder - WooCommerce Connection Check",
+                  style:
+                      TextStyle(color: Colors.white, fontFamily: 'OpenSans')),
+            ],
+          ),
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.white)),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            SizedBox(height: 10),
-            Image.asset(
-              "assets/images/logo.png",
-              width: 250,
+            DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: primaryColor,
+                ),
+                child: Image.asset("images/logo.png", scale: 1.8)),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: const Text(
+                'WhatsApp שלח הודעה ל',
+                textAlign: TextAlign.right,
+              ),
+              onTap: () {
+                launchUrlString("https://wa.me/+972504610570/");
+              },
             ),
-            SizedBox(height: 10),
-            const Text("NewOrder - WooCommerce Connection Check",
-                style: TextStyle(color: Colors.white, fontFamily: 'OpenSans')),
+            ListTile(
+              leading: Icon(Icons.phone),
+              title: const Text(
+                'צור קשר',
+                textAlign: TextAlign.right,
+              ),
+              onTap: () => launchUrlString("tel://0747033940"),
+            ),
+            ListTile(
+              leading: Icon(Icons.web),
+              title: const Text(
+                'קישור לאתר',
+                textAlign: TextAlign.right,
+              ),
+              onTap: () => launchUrlString("https://www.neworder.co.il"),
+            ),
+            SizedBox(height: 550),
+            Text(
+              '2024 Ⓒ פותח על ידי ניו אורדר בע"מ',
+              textAlign: TextAlign.center,
+            )
           ],
         ),
-        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -292,11 +338,11 @@ class _HomepageState extends State<Homepage> {
               Container(
                 margin: EdgeInsets.only(top: 100),
                 child: const Text(
-                  '2024 Ⓒ כל הזכויות שמורות לניו אורדר בע"מ',
+                  '2024 Ⓒ פותח על ידי ניו אורדר בע"מ',
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.openSansTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         fontFamily: 'OpenSans',
-        useMaterial3: true,
       ),
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
