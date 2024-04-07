@@ -105,23 +105,47 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 120,
           backgroundColor: primaryColor,
-          title: Column(
-            children: [
-              SizedBox(height: 10),
-              Image.asset(
-                "images/logo.png",
-                width: 250,
-              ),
-              SizedBox(height: 10),
-              const Text("NewOrder - WooCommerce Connection Check",
-                  style:
-                      TextStyle(color: Colors.white, fontFamily: 'OpenSans')),
-            ],
-          ),
+          title: isMobile
+              ? Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Image.asset(
+                      "images/logo.png",
+                      width: 200,
+                    ),
+                    SizedBox(height: 10),
+                    const Text(
+                      "NewOrder - WooCommerce",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'OpenSans'),
+                    ),
+                    const Text(
+                      "Connection Check",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'OpenSans'),
+                    ),
+                  ],
+                ) // Hide the title text on mobile
+              : Column(
+                  children: [
+                    SizedBox(height: 10),
+                    Image.asset(
+                      "images/logo.png",
+                      width: 250,
+                    ),
+                    SizedBox(height: 10),
+                    const Text(
+                      "NewOrder - WooCommerce Connection Check",
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'OpenSans'),
+                    ),
+                  ],
+                ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.white)),
       endDrawer: Drawer(
