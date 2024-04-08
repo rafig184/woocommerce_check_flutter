@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:woocommerce_flutter/colors.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:circular_menu/circular_menu.dart';
+import 'package:woocommerce_flutter/widgets/custom_button.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  void cleaAll() {
+  void clearAll() {
     domainController.clear();
     keyController.clear();
     secretController.clear();
@@ -259,7 +259,6 @@ class _HomepageState extends State<Homepage> {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
-                        // border: OutlineInputBorder(),
                         labelText: 'הכנס סיסמה :',
                       ),
                     ),
@@ -269,45 +268,20 @@ class _HomepageState extends State<Homepage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () => cleaAll(),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red[400]),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8.0), // Adjust the radius as needed
-                            ),
-                          )),
-                      child: const Text(
-                        "נקה",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    CustomButton(
+                        text: "נקה",
+                        color: Colors.red.shade400,
+                        onTap: () => clearAll),
                     const SizedBox(width: 20),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(primaryColor),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    8.0), // Adjust the radius as needed
-                              ),
-                            )),
-                        onPressed: () {
+                    CustomButton(
+                        text: "בדוק חיבור",
+                        color: primaryColor,
+                        onTap: () {
                           setState(() {
                             statusCode = null;
                           });
                           checkConnection();
-                        },
-                        child: const Text(
-                          "בדוק חיבור",
-                          style: TextStyle(color: Colors.white),
-                        )),
+                        })
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -334,23 +308,10 @@ class _HomepageState extends State<Homepage> {
                   child: Container(
                     margin:
                         EdgeInsets.only(bottom: 20), // Add margin bottom here
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.blue[400]),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => _launchUrl(url),
-                      child: Text(
-                        "קישור לבדיקה",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    child: CustomButton(
+                        text: "קישור לבדיקה",
+                        color: Colors.blue.shade400,
+                        onTap: () => _launchUrl(url)),
                   ),
                 ),
               ],
